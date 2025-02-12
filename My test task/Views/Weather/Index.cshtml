@@ -1,0 +1,28 @@
+﻿@using My_test_task.Models
+@model WeatherModel
+@{
+    ViewData["Title"] = "Погода";
+}
+
+<h2>Погода в @Model.City</h2>
+<p>Температура: @Model.Temperature°C</p>
+<p>Максимальна: @Model.MaxTemperature°C</p>
+<p>Мінімальна: @Model.MinTemperature°C</p>
+<p>Опис: @Model.Description</p>
+
+@if (Model.WillRain)
+{
+    <p style="color: red;">⚠ Попередження: Очікується дощ!</p>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div style="color: red; font-weight: bold; margin-bottom: 10px;">
+        @TempData["Error"]
+    </div>
+}
+
+<form method="post" asp-action="Search">
+    <input type="text" name="city" placeholder="Введіть місто" required />
+    <button type="submit">Шукати</button>
+</form>
